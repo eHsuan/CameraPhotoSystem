@@ -70,7 +70,7 @@ namespace CameraPhotoSystem.UI
             this.pbCamera.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbCamera.Location = new System.Drawing.Point(12, 12);
             this.pbCamera.Name = "pbCamera";
-            this.pbCamera.Size = new System.Drawing.Size(1525, 1546);
+            this.pbCamera.Size = new System.Drawing.Size(1525, 1130);
             this.pbCamera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbCamera.TabIndex = 0;
             this.pbCamera.TabStop = false;
@@ -85,7 +85,7 @@ namespace CameraPhotoSystem.UI
             this.tabMain.Location = new System.Drawing.Point(1545, 12);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
-            this.tabMain.Size = new System.Drawing.Size(288, 1546);
+            this.tabMain.Size = new System.Drawing.Size(288, 1130);
             this.tabMain.TabIndex = 1;
             this.tabMain.SelectedIndexChanged += new System.EventHandler(this.tabMain_SelectedIndexChanged);
             // 
@@ -98,10 +98,10 @@ namespace CameraPhotoSystem.UI
             this.tpProduction.Controls.Add(this.lblCount);
             this.tpProduction.Controls.Add(this.txtDataMatrix);
             this.tpProduction.Controls.Add(this.lblDM);
-            this.tpProduction.Location = new System.Drawing.Point(10, 71);
+            this.tpProduction.Location = new System.Drawing.Point(4, 41);
             this.tpProduction.Name = "tpProduction";
             this.tpProduction.Padding = new System.Windows.Forms.Padding(3);
-            this.tpProduction.Size = new System.Drawing.Size(268, 1465);
+            this.tpProduction.Size = new System.Drawing.Size(280, 1085);
             this.tpProduction.TabIndex = 0;
             this.tpProduction.Text = "Production";
             this.tpProduction.UseVisualStyleBackColor = true;
@@ -146,7 +146,7 @@ namespace CameraPhotoSystem.UI
             this.numPhotoCount.Font = new System.Drawing.Font("Arial", 22F, System.Drawing.FontStyle.Bold);
             this.numPhotoCount.Location = new System.Drawing.Point(10, 130);
             this.numPhotoCount.Name = "numPhotoCount";
-            this.numPhotoCount.Size = new System.Drawing.Size(260, 92);
+            this.numPhotoCount.Size = new System.Drawing.Size(260, 58);
             this.numPhotoCount.TabIndex = 3;
             // 
             // lblCount
@@ -163,7 +163,7 @@ namespace CameraPhotoSystem.UI
             this.txtDataMatrix.Font = new System.Drawing.Font("Arial", 22F, System.Drawing.FontStyle.Bold);
             this.txtDataMatrix.Location = new System.Drawing.Point(10, 40);
             this.txtDataMatrix.Name = "txtDataMatrix";
-            this.txtDataMatrix.Size = new System.Drawing.Size(260, 92);
+            this.txtDataMatrix.Size = new System.Drawing.Size(260, 58);
             this.txtDataMatrix.TabIndex = 1;
             // 
             // lblDM
@@ -179,10 +179,10 @@ namespace CameraPhotoSystem.UI
             // 
             this.tpEngineering.Controls.Add(this.grpLang);
             this.tpEngineering.Controls.Add(this.grpEngControl);
-            this.tpEngineering.Location = new System.Drawing.Point(10, 71);
+            this.tpEngineering.Location = new System.Drawing.Point(4, 41);
             this.tpEngineering.Name = "tpEngineering";
             this.tpEngineering.Padding = new System.Windows.Forms.Padding(3);
-            this.tpEngineering.Size = new System.Drawing.Size(268, 729);
+            this.tpEngineering.Size = new System.Drawing.Size(280, 1501);
             this.tpEngineering.TabIndex = 1;
             this.tpEngineering.Text = "Technic";
             this.tpEngineering.UseVisualStyleBackColor = true;
@@ -207,7 +207,7 @@ namespace CameraPhotoSystem.UI
             "Deutsch (DE)"});
             this.cmbLanguage.Location = new System.Drawing.Point(10, 65);
             this.cmbLanguage.Name = "cmbLanguage";
-            this.cmbLanguage.Size = new System.Drawing.Size(240, 62);
+            this.cmbLanguage.Size = new System.Drawing.Size(240, 40);
             this.cmbLanguage.TabIndex = 1;
             this.cmbLanguage.SelectedIndexChanged += new System.EventHandler(this.cmbLanguage_SelectedIndexChanged);
             // 
@@ -264,7 +264,7 @@ namespace CameraPhotoSystem.UI
             "Kamera 3"});
             this.cmbEngCameraSelect.Location = new System.Drawing.Point(10, 60);
             this.cmbEngCameraSelect.Name = "cmbEngCameraSelect";
-            this.cmbEngCameraSelect.Size = new System.Drawing.Size(240, 62);
+            this.cmbEngCameraSelect.Size = new System.Drawing.Size(240, 40);
             this.cmbEngCameraSelect.TabIndex = 1;
             this.cmbEngCameraSelect.SelectedIndexChanged += new System.EventHandler(this.cmbEngCameraSelect_SelectedIndexChanged);
             // 
@@ -278,7 +278,7 @@ namespace CameraPhotoSystem.UI
             // 
             // MainForm
             // 
-            this.ClientSize = new System.Drawing.Size(1845, 1586);
+            this.ClientSize = new System.Drawing.Size(1845, 1170);
             this.Controls.Add(this.tabMain);
             this.Controls.Add(this.pbCamera);
             this.Name = "MainForm";
