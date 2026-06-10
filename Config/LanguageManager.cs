@@ -35,7 +35,7 @@ namespace CameraPhotoSystem.Config
             { "LogCaptureDone", new Dictionary<Language, string> { { Language.CH, "拍照完成，記錄已儲存。" }, { Language.DE, "Aufnahme abgeschlossen, Datensatz gespeichert." } } },
             { "LogSwitchCam", new Dictionary<Language, string> { { Language.CH, "自動切換至相機 {0} 預覽" }, { Language.DE, "Automatisch auf Kamera {0} gewechselt." } } },
             { "BtnLang", new Dictionary<Language, string> { { Language.CH, "切換語系 (Language):" }, { Language.DE, "Sprache wählen:" } } },
-            { "WindowTitle", new Dictionary<Language, string> { { Language.CH, "相機拍照系統" }, { Language.DE, "Werk-Fotosystem" } } }
+            { "WindowTitle", new Dictionary<Language, string> { { Language.CH, "相機拍照系統 V1.0.3" }, { Language.DE, "Werk-Fotosystem V1.0.3" } } }
         };
 
         public static string T(string key)
