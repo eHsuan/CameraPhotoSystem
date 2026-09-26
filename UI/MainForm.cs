@@ -265,6 +265,7 @@ namespace CameraPhotoSystem.UI
                 tpEngineering.Text = L.T("TabEngineering");
                 lblDM.Text = L.T("LblScan");
                 lblCount.Text = L.T("LblProgress");
+                btnOpenSettings.Text = L.T("BtnSettings");
                 InitHardwareReorderUI();
                 UpdateCaptureButtonUI();
             } finally { this.ResumeLayout(); }
@@ -385,6 +386,18 @@ namespace CameraPhotoSystem.UI
             else { nextPreviewIdx = 2; displayCamNum = 3; }
             _cameraManager.SetPreviewIndex(nextPreviewIdx);
             AddLog(string.Format(L.T("LogSwitchCam"), displayCamNum));
+        }
+
+        private void btnOpenSettings_Click(object sender, EventArgs e)
+        {
+            using (var settingForm = new SettingForm())
+            {
+                if (settingForm.ShowDialog(this) == DialogResult.OK)
+                {
+                    numPhotoCount.Maximum = AppConfig.MaxPhotoCount;
+                    AddLog((L.Current == Language.CH) ? "系統設定已更新並套用。" : "Systemeinstellungen aktualisiert.");
+                }
+            }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) { _cameraManager.StopAllCameras(); if (_scanner != null) _scanner.Stop(); }

@@ -35,7 +35,17 @@ namespace CameraPhotoSystem.Config
             { "LogCaptureDone", new Dictionary<Language, string> { { Language.CH, "拍照完成，記錄已儲存。" }, { Language.DE, "Aufnahme abgeschlossen, Datensatz gespeichert." } } },
             { "LogSwitchCam", new Dictionary<Language, string> { { Language.CH, "自動切換至相機 {0} 預覽" }, { Language.DE, "Automatisch auf Kamera {0} gewechselt." } } },
             { "BtnLang", new Dictionary<Language, string> { { Language.CH, "切換語系 (Language):" }, { Language.DE, "Sprache wählen:" } } },
-            { "WindowTitle", new Dictionary<Language, string> { { Language.CH, "相機拍照系統 V1.0.4" }, { Language.DE, "Werk-Fotosystem V1.0.4" } } }
+            { "WindowTitle", new Dictionary<Language, string> { { Language.CH, "相機拍照系統 V1.0.4" }, { Language.DE, "Werk-Fotosystem V1.0.4" } } },
+            { "BtnSettings", new Dictionary<Language, string> { { Language.CH, "系統參數設定" }, { Language.DE, "Systemeinstellungen" } } },
+            { "SettingTitle", new Dictionary<Language, string> { { Language.CH, "系統參數設定" }, { Language.DE, "Systemeinstellungen" } } },
+            { "LblLineName", new Dictionary<Language, string> { { Language.CH, "產線名稱 (Line Name):" }, { Language.DE, "Linienname (Line Name):" } } },
+            { "LblPhotoRoot", new Dictionary<Language, string> { { Language.CH, "照片存放目錄 (Photo Root):" }, { Language.DE, "Fotopfad (Photo Root):" } } },
+            { "LblMaxCount", new Dictionary<Language, string> { { Language.CH, "最大拍照張數 (Max Photos):" }, { Language.DE, "Max. Fotos pro Zyklus:" } } },
+            { "LblDesiredWidth", new Dictionary<Language, string> { { Language.CH, "相機目標寬度解析度:" }, { Language.DE, "Ziel-Breitenauflösung:" } } },
+            { "BtnBrowse", new Dictionary<Language, string> { { Language.CH, "瀏覽..." }, { Language.DE, "Durchsuchen..." } } },
+            { "BtnSave", new Dictionary<Language, string> { { Language.CH, "儲存設定" }, { Language.DE, "Speichern" } } },
+            { "BtnCancel", new Dictionary<Language, string> { { Language.CH, "取消" }, { Language.DE, "Abbrechen" } } },
+            { "MsgSaveSuccess", new Dictionary<Language, string> { { Language.CH, "設定已成功儲存！" }, { Language.DE, "Einstellungen erfolgreich gespeichert!" } } }
         };
 
         public static string T(string key)

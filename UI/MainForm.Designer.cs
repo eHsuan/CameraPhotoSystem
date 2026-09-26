@@ -7,6 +7,7 @@ namespace CameraPhotoSystem.UI
         private System.Windows.Forms.TextBox txtDataMatrix;
         private System.Windows.Forms.NumericUpDown numPhotoCount;
         private System.Windows.Forms.Button btnCapture;
+        private System.Windows.Forms.Button btnOpenSettings;
         private System.Windows.Forms.Label lblDM;
         private System.Windows.Forms.Label lblCount;
         private System.Windows.Forms.TextBox txtLog;
@@ -36,6 +37,7 @@ namespace CameraPhotoSystem.UI
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tpProduction = new System.Windows.Forms.TabPage();
             this.txtLog = new System.Windows.Forms.TextBox();
+            this.btnOpenSettings = new System.Windows.Forms.Button();
             this.btnCapture = new System.Windows.Forms.Button();
             this.numPhotoCount = new System.Windows.Forms.NumericUpDown();
             this.lblCount = new System.Windows.Forms.Label();
@@ -90,6 +92,7 @@ namespace CameraPhotoSystem.UI
             // tpProduction
             // 
             this.tpProduction.Controls.Add(this.txtLog);
+            this.tpProduction.Controls.Add(this.btnOpenSettings);
             this.tpProduction.Controls.Add(this.btnCapture);
             this.tpProduction.Controls.Add(this.numPhotoCount);
             this.tpProduction.Controls.Add(this.lblCount);
@@ -113,8 +116,20 @@ namespace CameraPhotoSystem.UI
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(260, 466);
+            this.txtLog.Size = new System.Drawing.Size(260, 410);
             this.txtLog.TabIndex = 5;
+            // 
+            // btnOpenSettings
+            // 
+            this.btnOpenSettings.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnOpenSettings.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.btnOpenSettings.Location = new System.Drawing.Point(10, 716);
+            this.btnOpenSettings.Name = "btnOpenSettings";
+            this.btnOpenSettings.Size = new System.Drawing.Size(260, 50);
+            this.btnOpenSettings.TabIndex = 6;
+            this.btnOpenSettings.Text = "Settings";
+            this.btnOpenSettings.UseVisualStyleBackColor = false;
+            this.btnOpenSettings.Click += new System.EventHandler(this.btnOpenSettings_Click);
             // 
             // btnCapture
             // 
