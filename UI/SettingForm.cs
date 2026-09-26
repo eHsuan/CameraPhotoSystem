@@ -23,9 +23,11 @@ namespace CameraPhotoSystem.UI
             this.Text = L.T("SettingTitle");
             lblLineName.Text = L.T("LblLineName");
             lblPhotoRoot.Text = L.T("LblPhotoRoot");
+            lblUploadPath.Text = L.T("LblUploadPath");
             lblMaxCount.Text = L.T("LblMaxCount");
             lblDesiredWidth.Text = L.T("LblDesiredWidth");
             btnBrowse.Text = L.T("BtnBrowse");
+            btnBrowseUpload.Text = L.T("BtnBrowse");
             btnSave.Text = L.T("BtnSave");
             btnCancel.Text = L.T("BtnCancel");
         }
@@ -34,6 +36,7 @@ namespace CameraPhotoSystem.UI
         {
             txtLineName.Text = AppConfig.LineName;
             txtPhotoRoot.Text = AppConfig.PhotoRootPath;
+            txtUploadPath.Text = AppConfig.UploadPath;
             numMaxCount.Value = Math.Max(numMaxCount.Minimum, Math.Min(numMaxCount.Maximum, AppConfig.MaxPhotoCount));
 
             int currentWidth = AppConfig.DesiredWidth;
@@ -70,6 +73,23 @@ namespace CameraPhotoSystem.UI
             }
         }
 
+        private void btnBrowseUpload_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                fbd.Description = (L.Current == Language.CH) ? "請選擇 CSV 上傳目標目錄" : "Bitte Zielordner für CSV-Upload wählen";
+                if (Directory.Exists(txtUploadPath.Text.Trim()))
+                {
+                    fbd.SelectedPath = txtUploadPath.Text.Trim();
+                }
+
+                if (fbd.ShowDialog(this) == DialogResult.OK)
+                {
+                    txtUploadPath.Text = fbd.SelectedPath;
+                }
+            }
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             string lineName = txtLineName.Text.Trim();
@@ -85,6 +105,14 @@ namespace CameraPhotoSystem.UI
             {
                 MessageBox.Show((L.Current == Language.CH) ? "照片儲存目錄不能為空！" : "Fotopfad darf nicht leer sein!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtPhotoRoot.Focus();
+                return;
+            }
+
+            string uploadPath = txtUploadPath.Text.Trim();
+            if (string.IsNullOrEmpty(uploadPath))
+            {
+                MessageBox.Show((L.Current == Language.CH) ? "上傳目錄不能為空！" : "Upload-Pfad darf nicht leer sein!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtUploadPath.Focus();
                 return;
             }
 
@@ -114,7 +142,7 @@ namespace CameraPhotoSystem.UI
                 desiredWidth = 3840;
             }
 
-            AppConfig.UpdateSettings(lineName, photoPath, maxCount, desiredWidth);
+            AppConfig.UpdateSettings(lineName, photoPath, maxCount, desiredWidth, uploadPath);
 
             MessageBox.Show(L.T("MsgSaveSuccess"), "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.DialogResult = DialogResult.OK;

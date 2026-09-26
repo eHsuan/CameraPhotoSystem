@@ -111,6 +111,7 @@
     <Compile Include="Scanner\KeyenceScanner.cs" />
     <Compile Include="Service\ApiService.cs" />
     <Compile Include="Service\CaptureService.cs" />
+    <Compile Include="Service\CsvExportService.cs" />
     <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

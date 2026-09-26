@@ -12,6 +12,7 @@ namespace CameraPhotoSystem.Config
         public string PhotoRootPath { get; set; } = @"D:\Photo";
         public int MaxPhotoCount { get; set; } = 5;
         public int DesiredWidth { get; set; } = 3840;
+        public string UploadPath { get; set; } = @"D:\Upload";
     }
 
     public static class AppConfig
@@ -34,6 +35,7 @@ namespace CameraPhotoSystem.Config
                     var setting = new JavaScriptSerializer().Deserialize<SystemSetting>(json);
                     if (setting != null)
                     {
+                        if (string.IsNullOrEmpty(setting.UploadPath)) setting.UploadPath = @"D:\Upload";
                         Setting = setting;
                         return;
                     }
@@ -50,7 +52,8 @@ namespace CameraPhotoSystem.Config
                 LineName = ConfigurationManager.AppSettings["LineName"] ?? "FQC_1",
                 PhotoRootPath = ConfigurationManager.AppSettings["PhotoRootPath"] ?? @"D:\Photo",
                 MaxPhotoCount = int.TryParse(ConfigurationManager.AppSettings["MaxPhotoCount"], out int max) ? max : 5,
-                DesiredWidth = int.TryParse(ConfigurationManager.AppSettings["DesiredWidth"], out int width) ? width : 3840
+                DesiredWidth = int.TryParse(ConfigurationManager.AppSettings["DesiredWidth"], out int width) ? width : 3840,
+                UploadPath = ConfigurationManager.AppSettings["UploadPath"] ?? @"D:\Upload"
             };
 
             Save();
@@ -70,12 +73,13 @@ namespace CameraPhotoSystem.Config
             }
         }
 
-        public static void UpdateSettings(string lineName, string photoRootPath, int maxPhotoCount, int desiredWidth)
+        public static void UpdateSettings(string lineName, string photoRootPath, int maxPhotoCount, int desiredWidth, string uploadPath)
         {
             Setting.LineName = lineName;
             Setting.PhotoRootPath = photoRootPath;
             Setting.MaxPhotoCount = maxPhotoCount;
             Setting.DesiredWidth = desiredWidth;
+            Setting.UploadPath = uploadPath;
             Save();
         }
 
@@ -83,6 +87,7 @@ namespace CameraPhotoSystem.Config
         public static string PhotoRootPath => Setting?.PhotoRootPath ?? @"D:\Photo";
         public static int MaxPhotoCount => Setting?.MaxPhotoCount ?? 5;
         public static int DesiredWidth => Setting?.DesiredWidth ?? 3840;
+        public static string UploadPath => Setting?.UploadPath ?? @"D:\Upload";
 
         public static int CameraIndex => int.TryParse(ConfigurationManager.AppSettings["CameraIndex"], out int idx) ? idx : 0;
         public static string ScannerComPort => ConfigurationManager.AppSettings["ScannerComPort"] ?? "COM5";

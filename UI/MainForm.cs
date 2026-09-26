@@ -16,6 +16,7 @@ namespace CameraPhotoSystem.UI
         private readonly CameraManager _cameraManager;
         private readonly CaptureService _captureService;
         private readonly ApiService _apiService;
+        private readonly CsvExportService _csvExportService;
         private Scanner.KeyenceScanner _scanner;
         
         private int _currentPhotoIndex = 0;
@@ -41,6 +42,7 @@ namespace CameraPhotoSystem.UI
             _cameraManager = new CameraManager();
             _captureService = new CaptureService(_cameraManager);
             _apiService = new ApiService();
+            _csvExportService = new CsvExportService();
             
             _cameraManager.OnFrameArrived += (s, bmp) => {
                 if (this.IsDisposed || _isProcessingFrame) { bmp.Dispose(); return; }
@@ -369,8 +371,28 @@ namespace CameraPhotoSystem.UI
 
                 if (_currentPhotoIndex >= 4) 
                 {
-                    AddLog(L.T("LogCaptureDone")); _lastFinishedDmc = dm; _currentPhotoIndex = 0;
-                    numPhotoCount.Value = 0; txtDataMatrix.Clear(); _cameraManager.SetPreviewIndex(0); txtDataMatrix.Focus();
+                    AddLog(L.T("LogCaptureDone"));
+
+                    // 同步產生 CSV 並執行上傳 (含重試 3 次)
+                    var csvResult = _csvExportService.ExportAndUploadSync(dm, (msg) => AddLog(msg));
+                    if (csvResult.IsSuccess)
+                    {
+                        AddLog(string.Format(L.T("LogCsvExportSuccess"), csvResult.TargetFilePath));
+                    }
+                    else
+                    {
+                        string uploadDir = Path.Combine(AppConfig.UploadPath, DateTime.Now.ToString("yyyyMMdd"));
+                        string alertMsg = string.Format(L.T("MsgCsvUploadFailed"), dm, uploadDir, csvResult.LocalFilePath);
+                        AddLog("【錯誤】" + alertMsg.Replace("\r\n", " ").Replace("\n", " "));
+                        MessageBox.Show(this, alertMsg, "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+                    _lastFinishedDmc = dm;
+                    _currentPhotoIndex = 0;
+                    numPhotoCount.Value = 0;
+                    txtDataMatrix.Clear();
+                    _cameraManager.SetPreviewIndex(0);
+                    txtDataMatrix.Focus();
                 }
                 else { UpdatePreviewBasedOnProgress(); }
             }
