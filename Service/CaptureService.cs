@@ -4,8 +4,6 @@ using System.IO;
 using System.Linq;
 using CameraPhotoSystem.Camera;
 using CameraPhotoSystem.Config;
-using CameraPhotoSystem.Model;
-using CameraPhotoSystem.Repository;
 using CameraPhotoSystem.Utils;
 
 namespace CameraPhotoSystem.Service
@@ -13,12 +11,10 @@ namespace CameraPhotoSystem.Service
     public class CaptureService
     {
         private readonly CameraManager _cameraManager;
-        private readonly PhotoRepository _repository;
 
         public CaptureService(CameraManager cameraManager)
         {
             _cameraManager = cameraManager;
-            _repository = new PhotoRepository();
         }
 
         // 恢復為手動傳參存檔模式
@@ -49,16 +45,6 @@ namespace CameraPhotoSystem.Service
                 bmp.Save(fullPath, jpegEncoder, encoderParams);
                 bmp.Dispose();
 
-                var record = new PhotoRecord
-                {
-                    Id = Guid.NewGuid(),
-                    DataMatrix = dataMatrix,
-                    PhotoPath = fullPath,
-                    PhotoIndex = photoIndex,
-                    CreateTime = DateTime.Now
-                };
-
-                _repository.Insert(record);
                 Logger.Info(string.Format("拍照存檔成功 (新結構): {0}", fullPath));
             }
             catch (Exception ex)

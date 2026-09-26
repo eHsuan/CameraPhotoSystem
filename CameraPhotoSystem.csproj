@@ -94,9 +94,6 @@
     <Reference Include="AForge.Video.DirectShow">
       <HintPath>packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
     </Reference>
-    <Reference Include="LiteDB">
-      <HintPath>packages\LiteDB.5.0.11\lib\net45\LiteDB.dll</HintPath>
-    </Reference>
     <Reference Include="zxing">
       <HintPath>packages\ZXing.Net.0.16.9\lib\net461\zxing.dll</HintPath>
     </Reference>
@@ -110,24 +107,15 @@
     <Compile Include="Config\CameraSetting.cs" />
     <Compile Include="Config\LanguageManager.cs" />
     <Compile Include="Config\ScannerSetting.cs" />
-    <Compile Include="Model\PhotoRecord.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Repository\PhotoRepository.cs" />
     <Compile Include="Scanner\KeyenceScanner.cs" />
     <Compile Include="Service\ApiService.cs" />
     <Compile Include="Service\CaptureService.cs" />
-    <Compile Include="Service\QueryService.cs" />
     <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\QueryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\QueryForm.Designer.cs">
-      <DependentUpon>QueryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\Logger.cs" />
   </ItemGroup>

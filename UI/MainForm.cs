@@ -265,7 +265,6 @@ namespace CameraPhotoSystem.UI
                 tpEngineering.Text = L.T("TabEngineering");
                 lblDM.Text = L.T("LblScan");
                 lblCount.Text = L.T("LblProgress");
-                btnOpenQuery.Text = L.T("BtnQuery");
                 InitHardwareReorderUI();
                 UpdateCaptureButtonUI();
             } finally { this.ResumeLayout(); }
@@ -388,7 +387,6 @@ namespace CameraPhotoSystem.UI
             AddLog(string.Format(L.T("LogSwitchCam"), displayCamNum));
         }
 
-        private void btnOpenQuery_Click(object sender, EventArgs e) { new QueryForm().Show(); }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) { _cameraManager.StopAllCameras(); if (_scanner != null) _scanner.Stop(); }
     }
 }

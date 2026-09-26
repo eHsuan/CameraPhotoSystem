@@ -7,7 +7,6 @@ namespace CameraPhotoSystem.UI
         private System.Windows.Forms.TextBox txtDataMatrix;
         private System.Windows.Forms.NumericUpDown numPhotoCount;
         private System.Windows.Forms.Button btnCapture;
-        private System.Windows.Forms.Button btnOpenQuery;
         private System.Windows.Forms.Label lblDM;
         private System.Windows.Forms.Label lblCount;
         private System.Windows.Forms.TextBox txtLog;
@@ -37,7 +36,6 @@ namespace CameraPhotoSystem.UI
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tpProduction = new System.Windows.Forms.TabPage();
             this.txtLog = new System.Windows.Forms.TextBox();
-            this.btnOpenQuery = new System.Windows.Forms.Button();
             this.btnCapture = new System.Windows.Forms.Button();
             this.numPhotoCount = new System.Windows.Forms.NumericUpDown();
             this.lblCount = new System.Windows.Forms.Label();
@@ -92,7 +90,6 @@ namespace CameraPhotoSystem.UI
             // tpProduction
             // 
             this.tpProduction.Controls.Add(this.txtLog);
-            this.tpProduction.Controls.Add(this.btnOpenQuery);
             this.tpProduction.Controls.Add(this.btnCapture);
             this.tpProduction.Controls.Add(this.numPhotoCount);
             this.tpProduction.Controls.Add(this.lblCount);
@@ -116,18 +113,8 @@ namespace CameraPhotoSystem.UI
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
             this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtLog.Size = new System.Drawing.Size(260, 410);
+            this.txtLog.Size = new System.Drawing.Size(260, 466);
             this.txtLog.TabIndex = 5;
-            // 
-            // btnOpenQuery
-            // 
-            this.btnOpenQuery.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.btnOpenQuery.Location = new System.Drawing.Point(10, 716);
-            this.btnOpenQuery.Name = "btnOpenQuery";
-            this.btnOpenQuery.Size = new System.Drawing.Size(260, 50);
-            this.btnOpenQuery.TabIndex = 6;
-            this.btnOpenQuery.Text = "History";
-            this.btnOpenQuery.Click += new System.EventHandler(this.btnOpenQuery_Click);
             // 
             // btnCapture
             // 
