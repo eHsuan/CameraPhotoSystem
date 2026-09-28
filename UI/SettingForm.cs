@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using CameraPhotoSystem.Config;
+using CameraPhotoSystem.Utils;
 
 namespace CameraPhotoSystem.UI
 {
@@ -10,6 +11,7 @@ namespace CameraPhotoSystem.UI
         public SettingForm()
         {
             InitializeComponent();
+            IconHelper.ApplyFormIcon(this);
         }
 
         private void SettingForm_Load(object sender, EventArgs e)

@@ -33,6 +33,7 @@ namespace CameraPhotoSystem.UI
         public MainForm()
         {
             InitializeComponent();
+            IconHelper.ApplyFormIcon(this);
             this.Font = new Font("Segoe UI", 9F); 
             this.WindowState = FormWindowState.Maximized; 
             
