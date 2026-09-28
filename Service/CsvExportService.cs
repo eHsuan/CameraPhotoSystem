@@ -100,6 +100,63 @@ namespace CameraPhotoSystem.Service
             return result;
         }
 
+        public CsvExportResult ExportAndUploadTest(string targetUploadRoot, string lineName)
+        {
+            var result = new CsvExportResult { IsSuccess = false };
+
+            if (string.IsNullOrWhiteSpace(targetUploadRoot))
+            {
+                result.ErrorMessage = "Upload path is empty";
+                return result;
+            }
+
+            try
+            {
+                // 1. 確保本地 CSV 目錄存在
+                if (!Directory.Exists(LocalCsvDirectory))
+                {
+                    Directory.CreateDirectory(LocalCsvDirectory);
+                }
+
+                // 2. 建立測試 CSV 檔案 (以 TEST_ 開頭加上時間戳記)
+                string testDmc = "TEST_SAMPLE_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                string localFilePath = Path.Combine(LocalCsvDirectory, testDmc + ".csv");
+                result.LocalFilePath = localFilePath;
+
+                string currentLine = string.IsNullOrWhiteSpace(lineName) ? AppConfig.LineName : lineName;
+                string timeStr = DateTime.Now.ToString("yyyy/M/d HH:mm:ss");
+                string content = string.Format("DMC,DateTime,Line\r\n{0},{1},{2}\r\n", testDmc, timeStr, currentLine);
+
+                File.WriteAllText(localFilePath, content, new UTF8Encoding(false));
+                Logger.Info(string.Format("測試本地 CSV 已產生: {0}", localFilePath));
+
+                // 3. 依照目前路徑規則上傳至目標目錄 (yyyyMMdd 子目錄)
+                string dateFolder = DateTime.Now.ToString("yyyyMMdd");
+                string targetDir = Path.Combine(targetUploadRoot, dateFolder);
+                string targetFilePath = Path.Combine(targetDir, testDmc + ".csv");
+                result.TargetFilePath = targetFilePath;
+
+                if (!Directory.Exists(targetDir))
+                {
+                    Directory.CreateDirectory(targetDir);
+                }
+
+                File.Copy(localFilePath, targetFilePath, true);
+                result.IsSuccess = true;
+                Logger.Info(string.Format("測試 CSV 成功複製至目標路徑: {0}", targetFilePath));
+
+                // 4. 清理本地端超過 30 天的舊 CSV 檔案
+                CleanupOldLocalCsvFiles();
+            }
+            catch (Exception ex)
+            {
+                result.ErrorMessage = ex.Message;
+                Logger.Error("測試 CSV 產生或上傳過程發生例外", ex);
+            }
+
+            return result;
+        }
+
         private void CleanupOldLocalCsvFiles()
         {
             try

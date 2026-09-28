@@ -11,6 +11,7 @@ namespace CameraPhotoSystem.UI
         private System.Windows.Forms.Label lblUploadPath;
         private System.Windows.Forms.TextBox txtUploadPath;
         private System.Windows.Forms.Button btnBrowseUpload;
+        private System.Windows.Forms.Button btnTestUpload;
         private System.Windows.Forms.Label lblMaxCount;
         private System.Windows.Forms.NumericUpDown numMaxCount;
         private System.Windows.Forms.Label lblDesiredWidth;
@@ -37,6 +38,7 @@ namespace CameraPhotoSystem.UI
             this.lblUploadPath = new System.Windows.Forms.Label();
             this.txtUploadPath = new System.Windows.Forms.TextBox();
             this.btnBrowseUpload = new System.Windows.Forms.Button();
+            this.btnTestUpload = new System.Windows.Forms.Button();
             this.lblMaxCount = new System.Windows.Forms.Label();
             this.numMaxCount = new System.Windows.Forms.NumericUpDown();
             this.lblDesiredWidth = new System.Windows.Forms.Label();
@@ -105,19 +107,30 @@ namespace CameraPhotoSystem.UI
             this.txtUploadPath.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtUploadPath.Location = new System.Drawing.Point(20, 164);
             this.txtUploadPath.Name = "txtUploadPath";
-            this.txtUploadPath.Size = new System.Drawing.Size(325, 30);
+            this.txtUploadPath.Size = new System.Drawing.Size(260, 30);
             this.txtUploadPath.TabIndex = 6;
             // 
             // btnBrowseUpload
             // 
             this.btnBrowseUpload.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnBrowseUpload.Location = new System.Drawing.Point(355, 163);
+            this.btnBrowseUpload.Location = new System.Drawing.Point(285, 163);
             this.btnBrowseUpload.Name = "btnBrowseUpload";
-            this.btnBrowseUpload.Size = new System.Drawing.Size(85, 32);
+            this.btnBrowseUpload.Size = new System.Drawing.Size(75, 32);
             this.btnBrowseUpload.TabIndex = 7;
             this.btnBrowseUpload.Text = "瀏覽...";
             this.btnBrowseUpload.UseVisualStyleBackColor = true;
             this.btnBrowseUpload.Click += new System.EventHandler(this.btnBrowseUpload_Click);
+            // 
+            // btnTestUpload
+            // 
+            this.btnTestUpload.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnTestUpload.Location = new System.Drawing.Point(365, 163);
+            this.btnTestUpload.Name = "btnTestUpload";
+            this.btnTestUpload.Size = new System.Drawing.Size(75, 32);
+            this.btnTestUpload.TabIndex = 8;
+            this.btnTestUpload.Text = "測試";
+            this.btnTestUpload.UseVisualStyleBackColor = true;
+            this.btnTestUpload.Click += new System.EventHandler(this.btnTestUpload_Click);
             // 
             // lblMaxCount
             // 
@@ -196,6 +209,7 @@ namespace CameraPhotoSystem.UI
             this.Controls.Add(this.lblDesiredWidth);
             this.Controls.Add(this.numMaxCount);
             this.Controls.Add(this.lblMaxCount);
+            this.Controls.Add(this.btnTestUpload);
             this.Controls.Add(this.btnBrowseUpload);
             this.Controls.Add(this.txtUploadPath);
             this.Controls.Add(this.lblUploadPath);

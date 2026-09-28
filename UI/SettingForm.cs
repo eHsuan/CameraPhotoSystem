@@ -28,6 +28,7 @@ namespace CameraPhotoSystem.UI
             lblDesiredWidth.Text = L.T("LblDesiredWidth");
             btnBrowse.Text = L.T("BtnBrowse");
             btnBrowseUpload.Text = L.T("BtnBrowse");
+            btnTestUpload.Text = L.T("BtnTest");
             btnSave.Text = L.T("BtnSave");
             btnCancel.Text = L.T("BtnCancel");
         }
@@ -87,6 +88,30 @@ namespace CameraPhotoSystem.UI
                 {
                     txtUploadPath.Text = fbd.SelectedPath;
                 }
+            }
+        }
+
+        private void btnTestUpload_Click(object sender, EventArgs e)
+        {
+            string uploadPath = txtUploadPath.Text.Trim();
+            if (string.IsNullOrEmpty(uploadPath))
+            {
+                MessageBox.Show((L.Current == Language.CH) ? "上傳目錄不能為空！" : "Upload-Pfad darf nicht leer sein!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtUploadPath.Focus();
+                return;
+            }
+
+            string lineName = txtLineName.Text.Trim();
+            var csvExportService = new Service.CsvExportService();
+            var result = csvExportService.ExportAndUploadTest(uploadPath, lineName);
+
+            if (result.IsSuccess)
+            {
+                MessageBox.Show(string.Format(L.T("MsgTestUploadSuccess"), result.TargetFilePath), "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(string.Format(L.T("MsgTestUploadFailed"), result.ErrorMessage), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

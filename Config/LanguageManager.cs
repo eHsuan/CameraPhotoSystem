@@ -49,7 +49,10 @@ namespace CameraPhotoSystem.Config
             { "LblUploadPath", new Dictionary<Language, string> { { Language.CH, "上傳目錄 (Upload Path):" }, { Language.DE, "Upload-Pfad:" } } },
             { "LogCsvExportSuccess", new Dictionary<Language, string> { { Language.CH, "CSV 匯出成功並已同步上傳: {0}" }, { Language.DE, "CSV exportiert und hochgeladen: {0}" } } },
             { "LogCsvUploadRetry", new Dictionary<Language, string> { { Language.CH, "【警告】CSV 上傳失敗，正在進行第 {0}/3 次重試..." }, { Language.DE, "【Warnung】Upload fehlgeschlagen, Wiederholung {0}/3..." } } },
-            { "MsgCsvUploadFailed", new Dictionary<Language, string> { { Language.CH, "【警告】條碼 {0} 的 CSV 上傳至 [{1}] 失敗 (已重試 3 次)！\n請檢查網路連線或上傳路徑。\n\n本地 CSV 已安全保存在:\n{2}" }, { Language.DE, "【Warnung】CSV-Upload für Code {0} fehlgeschlagen (3 Versuche)!\nBitte Netzwerk oder Pfad prüfen.\n\nLokale Datei gespeichert unter:\n{2}" } } }
+            { "MsgCsvUploadFailed", new Dictionary<Language, string> { { Language.CH, "【警告】條碼 {0} 的 CSV 上傳至 [{1}] 失敗 (已重試 3 次)！\n請檢查網路連線或上傳路徑。\n\n本地 CSV 已安全保存在:\n{2}" }, { Language.DE, "【Warnung】CSV-Upload für Code {0} fehlgeschlagen (3 Versuche)!\nBitte Netzwerk oder Pfad prüfen.\n\nLokale Datei gespeichert unter:\n{2}" } } },
+            { "BtnTest", new Dictionary<Language, string> { { Language.CH, "測試" }, { Language.DE, "Test" } } },
+            { "MsgTestUploadSuccess", new Dictionary<Language, string> { { Language.CH, "測試 CSV 產生與上傳成功！\n\n已成功上傳至：\n{0}" }, { Language.DE, "Test-CSV erfolgreich erstellt und hochgeladen!\n\nErfolgreich hochgeladen nach:\n{0}" } } },
+            { "MsgTestUploadFailed", new Dictionary<Language, string> { { Language.CH, "測試 CSV 上傳失敗！\n\n錯誤原因：\n{0}" }, { Language.DE, "Test-CSV Upload fehlgeschlagen!\n\nFehlerursache:\n{0}" } } }
         };
 
         public static string T(string key)
