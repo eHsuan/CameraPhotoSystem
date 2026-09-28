@@ -31,14 +31,16 @@ namespace CameraPhotoSystem.Service
 
             try
             {
-                // 1. 確保本地 CSV 目錄存在
-                if (!Directory.Exists(LocalCsvDirectory))
+                // 1. 確保本地 CSV 目錄與當日日期目錄存在
+                string dateFolder = DateTime.Now.ToString("yyyyMMdd");
+                string localTargetDir = Path.Combine(LocalCsvDirectory, dateFolder);
+                if (!Directory.Exists(localTargetDir))
                 {
-                    Directory.CreateDirectory(LocalCsvDirectory);
+                    Directory.CreateDirectory(localTargetDir);
                 }
 
                 // 2. 建立本地 CSV 檔案 (格式比照範例)
-                string localFilePath = Path.Combine(LocalCsvDirectory, dmc + ".csv");
+                string localFilePath = Path.Combine(localTargetDir, dmc + ".csv");
                 result.LocalFilePath = localFilePath;
 
                 string timeStr = DateTime.Now.ToString("yyyy/M/d HH:mm:ss");
@@ -49,7 +51,6 @@ namespace CameraPhotoSystem.Service
 
                 // 3. 上傳至目標目錄 (含 3 次重試機制)
                 string uploadRoot = AppConfig.UploadPath;
-                string dateFolder = DateTime.Now.ToString("yyyyMMdd");
                 string targetDir = Path.Combine(uploadRoot, dateFolder);
                 string targetFilePath = Path.Combine(targetDir, dmc + ".csv");
                 result.TargetFilePath = targetFilePath;
@@ -112,15 +113,17 @@ namespace CameraPhotoSystem.Service
 
             try
             {
-                // 1. 確保本地 CSV 目錄存在
-                if (!Directory.Exists(LocalCsvDirectory))
+                // 1. 確保本地 CSV 目錄與當日日期目錄存在
+                string dateFolder = DateTime.Now.ToString("yyyyMMdd");
+                string localTargetDir = Path.Combine(LocalCsvDirectory, dateFolder);
+                if (!Directory.Exists(localTargetDir))
                 {
-                    Directory.CreateDirectory(LocalCsvDirectory);
+                    Directory.CreateDirectory(localTargetDir);
                 }
 
                 // 2. 建立測試 CSV 檔案 (以 TEST_ 開頭加上時間戳記)
                 string testDmc = "TEST_SAMPLE_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                string localFilePath = Path.Combine(LocalCsvDirectory, testDmc + ".csv");
+                string localFilePath = Path.Combine(localTargetDir, testDmc + ".csv");
                 result.LocalFilePath = localFilePath;
 
                 string currentLine = string.IsNullOrWhiteSpace(lineName) ? AppConfig.LineName : lineName;
@@ -131,7 +134,6 @@ namespace CameraPhotoSystem.Service
                 Logger.Info(string.Format("測試本地 CSV 已產生: {0}", localFilePath));
 
                 // 3. 依照目前路徑規則上傳至目標目錄 (yyyyMMdd 子目錄)
-                string dateFolder = DateTime.Now.ToString("yyyyMMdd");
                 string targetDir = Path.Combine(targetUploadRoot, dateFolder);
                 string targetFilePath = Path.Combine(targetDir, testDmc + ".csv");
                 result.TargetFilePath = targetFilePath;
@@ -165,9 +167,10 @@ namespace CameraPhotoSystem.Service
 
                 var cutoffDate = DateTime.Now.AddDays(-30);
                 var dirInfo = new DirectoryInfo(LocalCsvDirectory);
-                var files = dirInfo.GetFiles("*.csv");
 
-                foreach (var file in files)
+                // 1. 清理本地根目錄下過去遺留的舊 CSV 檔案 (向下相容)
+                var rootFiles = dirInfo.GetFiles("*.csv");
+                foreach (var file in rootFiles)
                 {
                     try
                     {
@@ -177,10 +180,49 @@ namespace CameraPhotoSystem.Service
                             Logger.Info(string.Format("已清理超過 30 天的舊 CSV: {0}", file.FullName));
                         }
                     }
-                    catch
+                    catch { }
+                }
+
+                // 2. 檢查各日期子目錄 (如 yyyyMMdd)
+                var subDirs = dirInfo.GetDirectories();
+                foreach (var subDir in subDirs)
+                {
+                    try
                     {
-                        // 忽略單一被佔用檔案的刪除失敗
+                        bool isExpired = false;
+                        if (DateTime.TryParseExact(subDir.Name, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out DateTime dirDate))
+                        {
+                            if (dirDate < cutoffDate.Date) isExpired = true;
+                        }
+                        else if (subDir.LastWriteTime < cutoffDate)
+                        {
+                            isExpired = true;
+                        }
+
+                        if (isExpired)
+                        {
+                            subDir.Delete(true);
+                            Logger.Info(string.Format("已清理超過 30 天的舊 CSV 目錄: {0}", subDir.FullName));
+                        }
+                        else
+                        {
+                            var subFiles = subDir.GetFiles("*.csv");
+                            foreach (var file in subFiles)
+                            {
+                                if (file.LastWriteTime < cutoffDate)
+                                {
+                                    file.Delete();
+                                    Logger.Info(string.Format("已清理超過 30 天的舊 CSV: {0}", file.FullName));
+                                }
+                            }
+
+                            if (subDir.GetFileSystemInfos().Length == 0)
+                            {
+                                subDir.Delete();
+                            }
+                        }
                     }
+                    catch { }
                 }
             }
             catch (Exception ex)
