@@ -61,7 +61,9 @@ namespace CameraPhotoSystem.Config
             { "LogSettingsUpdated", new Dictionary<Language, string> { { Language.CH, "系統設定已更新並套用。" }, { Language.DE, "Systemeinstellungen aktualisiert und übernommen." } } },
             { "MsgCamApplied", new Dictionary<Language, string> { { Language.CH, "相機設定已生效！" }, { Language.DE, "Kamera-Einstellungen übernommen!" } } },
             { "MsgScannerApplied", new Dictionary<Language, string> { { Language.CH, "掃描器設定已儲存並重啟" }, { Language.DE, "Scanner-Einstellungen gespeichert und neu gestartet." } } },
-            { "LogErrorPrefix", new Dictionary<Language, string> { { Language.CH, "【錯誤】" }, { Language.DE, "【Fehler】" } } }
+            { "LogErrorPrefix", new Dictionary<Language, string> { { Language.CH, "【錯誤】" }, { Language.DE, "【Fehler】" } } },
+            { "ErrPortNotExist", new Dictionary<Language, string> { { Language.CH, "通訊埠 '{0}' 不存在。" }, { Language.DE, "Der Port '{0}' existiert nicht." } } },
+            { "ErrPortAccessDenied", new Dictionary<Language, string> { { Language.CH, "通訊埠 '{0}' 存取被拒 (可能已被其他程式佔用)。" }, { Language.DE, "Zugriff auf Port '{0}' verweigert (bereits belegt)." } } }
         };
 
         public static string T(string key)

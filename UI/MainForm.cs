@@ -88,6 +88,8 @@ namespace CameraPhotoSystem.UI
 
         private void InitScanner()
         {
+            string port = ScannerConfigManager.Setting.PortName;
+            int baud = ScannerConfigManager.Setting.BaudRate;
             try
             {
                 if (_scanner != null) _scanner.Stop();
@@ -96,12 +98,26 @@ namespace CameraPhotoSystem.UI
                     this.BeginInvoke(new Action(() => { HandleScannerInput(barcode); }));
                 };
                 
-                string port = ScannerConfigManager.Setting.PortName;
-                int baud = ScannerConfigManager.Setting.BaudRate;
                 _scanner.Start(port, baud);
                 AddLog(string.Format(L.T("LogScannerStarted"), port, baud));
             }
-            catch (Exception ex) { AddLog(string.Format(L.T("LogScannerConnectFailed"), ex.Message)); }
+            catch (Exception ex)
+            {
+                string friendlyError;
+                if (ex is System.IO.IOException && (ex.Message.Contains("不存在") || ex.Message.ToLower().Contains("not exist")))
+                {
+                    friendlyError = string.Format(L.T("ErrPortNotExist"), port);
+                }
+                else if (ex is UnauthorizedAccessException || ex.Message.Contains("拒絕存取") || ex.Message.ToLower().Contains("denied"))
+                {
+                    friendlyError = string.Format(L.T("ErrPortAccessDenied"), port);
+                }
+                else
+                {
+                    friendlyError = ex.Message;
+                }
+                AddLog(string.Format(L.T("LogScannerConnectFailed"), friendlyError));
+            }
         }
 
         private void HandleScannerInput(string newBarcode)
