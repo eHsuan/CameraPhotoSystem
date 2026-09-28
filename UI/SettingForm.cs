@@ -24,7 +24,6 @@ namespace CameraPhotoSystem.UI
             lblLineName.Text = L.T("LblLineName");
             lblPhotoRoot.Text = L.T("LblPhotoRoot");
             lblUploadPath.Text = L.T("LblUploadPath");
-            lblMaxCount.Text = L.T("LblMaxCount");
             lblDesiredWidth.Text = L.T("LblDesiredWidth");
             btnBrowse.Text = L.T("BtnBrowse");
             btnBrowseUpload.Text = L.T("BtnBrowse");
@@ -38,7 +37,6 @@ namespace CameraPhotoSystem.UI
             txtLineName.Text = AppConfig.LineName;
             txtPhotoRoot.Text = AppConfig.PhotoRootPath;
             txtUploadPath.Text = AppConfig.UploadPath;
-            numMaxCount.Value = Math.Max(numMaxCount.Minimum, Math.Min(numMaxCount.Maximum, AppConfig.MaxPhotoCount));
 
             int currentWidth = AppConfig.DesiredWidth;
             bool matched = false;
@@ -154,8 +152,6 @@ namespace CameraPhotoSystem.UI
                 return;
             }
 
-            int maxCount = (int)numMaxCount.Value;
-
             int desiredWidth = 3840;
             string selectedWidthStr = cmbDesiredWidth.Text.Trim();
             if (selectedWidthStr.Contains(" "))
@@ -167,7 +163,7 @@ namespace CameraPhotoSystem.UI
                 desiredWidth = 3840;
             }
 
-            AppConfig.UpdateSettings(lineName, photoPath, maxCount, desiredWidth, uploadPath);
+            AppConfig.UpdateSettings(lineName, photoPath, desiredWidth, uploadPath);
 
             MessageBox.Show(L.T("MsgSaveSuccess"), "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.DialogResult = DialogResult.OK;

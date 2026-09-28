@@ -12,8 +12,6 @@ namespace CameraPhotoSystem.UI
         private System.Windows.Forms.TextBox txtUploadPath;
         private System.Windows.Forms.Button btnBrowseUpload;
         private System.Windows.Forms.Button btnTestUpload;
-        private System.Windows.Forms.Label lblMaxCount;
-        private System.Windows.Forms.NumericUpDown numMaxCount;
         private System.Windows.Forms.Label lblDesiredWidth;
         private System.Windows.Forms.ComboBox cmbDesiredWidth;
         private System.Windows.Forms.Button btnSave;
@@ -39,13 +37,10 @@ namespace CameraPhotoSystem.UI
             this.txtUploadPath = new System.Windows.Forms.TextBox();
             this.btnBrowseUpload = new System.Windows.Forms.Button();
             this.btnTestUpload = new System.Windows.Forms.Button();
-            this.lblMaxCount = new System.Windows.Forms.Label();
-            this.numMaxCount = new System.Windows.Forms.NumericUpDown();
             this.lblDesiredWidth = new System.Windows.Forms.Label();
             this.cmbDesiredWidth = new System.Windows.Forms.ComboBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numMaxCount)).BeginInit();
             this.SuspendLayout();
             // 
             // lblLineName
@@ -132,33 +127,14 @@ namespace CameraPhotoSystem.UI
             this.btnTestUpload.UseVisualStyleBackColor = true;
             this.btnTestUpload.Click += new System.EventHandler(this.btnTestUpload_Click);
             // 
-            // lblMaxCount
-            // 
-            this.lblMaxCount.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            this.lblMaxCount.Location = new System.Drawing.Point(20, 205);
-            this.lblMaxCount.Name = "lblMaxCount";
-            this.lblMaxCount.Size = new System.Drawing.Size(420, 20);
-            this.lblMaxCount.TabIndex = 8;
-            this.lblMaxCount.Text = "最大拍照張數 (Max Photos):";
-            // 
-            // numMaxCount
-            // 
-            this.numMaxCount.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.numMaxCount.Location = new System.Drawing.Point(20, 228);
-            this.numMaxCount.Maximum = new decimal(new int[] { 20, 0, 0, 0 });
-            this.numMaxCount.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            this.numMaxCount.Name = "numMaxCount";
-            this.numMaxCount.Size = new System.Drawing.Size(420, 32);
-            this.numMaxCount.TabIndex = 9;
-            this.numMaxCount.Value = new decimal(new int[] { 5, 0, 0, 0 });
             // 
             // lblDesiredWidth
             // 
             this.lblDesiredWidth.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            this.lblDesiredWidth.Location = new System.Drawing.Point(20, 268);
+            this.lblDesiredWidth.Location = new System.Drawing.Point(20, 205);
             this.lblDesiredWidth.Name = "lblDesiredWidth";
             this.lblDesiredWidth.Size = new System.Drawing.Size(420, 20);
-            this.lblDesiredWidth.TabIndex = 10;
+            this.lblDesiredWidth.TabIndex = 8;
             this.lblDesiredWidth.Text = "相機目標寬度解析度:";
             // 
             // cmbDesiredWidth
@@ -169,19 +145,19 @@ namespace CameraPhotoSystem.UI
             "3840 (4K UHD)",
             "1920 (1080p FHD)",
             "1280 (720p HD)"});
-            this.cmbDesiredWidth.Location = new System.Drawing.Point(20, 291);
+            this.cmbDesiredWidth.Location = new System.Drawing.Point(20, 228);
             this.cmbDesiredWidth.Name = "cmbDesiredWidth";
             this.cmbDesiredWidth.Size = new System.Drawing.Size(420, 33);
-            this.cmbDesiredWidth.TabIndex = 11;
+            this.cmbDesiredWidth.TabIndex = 9;
             // 
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.LightGreen;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 10.5F, System.Drawing.FontStyle.Bold);
-            this.btnSave.Location = new System.Drawing.Point(215, 345);
+            this.btnSave.Location = new System.Drawing.Point(215, 280);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(110, 42);
-            this.btnSave.TabIndex = 12;
+            this.btnSave.TabIndex = 10;
             this.btnSave.Text = "儲存設定";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -190,10 +166,10 @@ namespace CameraPhotoSystem.UI
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.btnCancel.Location = new System.Drawing.Point(335, 345);
+            this.btnCancel.Location = new System.Drawing.Point(335, 280);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(105, 42);
-            this.btnCancel.TabIndex = 13;
+            this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -202,13 +178,11 @@ namespace CameraPhotoSystem.UI
             // 
             this.AcceptButton = this.btnSave;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(464, 405);
+            this.ClientSize = new System.Drawing.Size(464, 340);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.cmbDesiredWidth);
             this.Controls.Add(this.lblDesiredWidth);
-            this.Controls.Add(this.numMaxCount);
-            this.Controls.Add(this.lblMaxCount);
             this.Controls.Add(this.btnTestUpload);
             this.Controls.Add(this.btnBrowseUpload);
             this.Controls.Add(this.txtUploadPath);
@@ -225,7 +199,6 @@ namespace CameraPhotoSystem.UI
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "系統參數設定";
             this.Load += new System.EventHandler(this.SettingForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numMaxCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -58,7 +58,7 @@ namespace CameraPhotoSystem.UI
             };
 
             numPhotoCount.Value = 0;
-            numPhotoCount.Maximum = AppConfig.MaxPhotoCount;
+            numPhotoCount.Maximum = 4;
             numPhotoCount.Enabled = false; 
             txtDataMatrix.TextChanged += txtDataMatrix_TextChanged;
         }
@@ -416,7 +416,6 @@ namespace CameraPhotoSystem.UI
             {
                 if (settingForm.ShowDialog(this) == DialogResult.OK)
                 {
-                    numPhotoCount.Maximum = AppConfig.MaxPhotoCount;
                     AddLog((L.Current == Language.CH) ? "系統設定已更新並套用。" : "Systemeinstellungen aktualisiert.");
                 }
             }

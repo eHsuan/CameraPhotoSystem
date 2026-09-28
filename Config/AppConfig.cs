@@ -73,11 +73,10 @@ namespace CameraPhotoSystem.Config
             }
         }
 
-        public static void UpdateSettings(string lineName, string photoRootPath, int maxPhotoCount, int desiredWidth, string uploadPath)
+        public static void UpdateSettings(string lineName, string photoRootPath, int desiredWidth, string uploadPath)
         {
             Setting.LineName = lineName;
             Setting.PhotoRootPath = photoRootPath;
-            Setting.MaxPhotoCount = maxPhotoCount;
             Setting.DesiredWidth = desiredWidth;
             Setting.UploadPath = uploadPath;
             Save();
