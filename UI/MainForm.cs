@@ -99,9 +99,9 @@ namespace CameraPhotoSystem.UI
                 string port = ScannerConfigManager.Setting.PortName;
                 int baud = ScannerConfigManager.Setting.BaudRate;
                 _scanner.Start(port, baud);
-                AddLog(string.Format("掃描器已啟動於 {0} (包率: {1})", port, baud));
+                AddLog(string.Format(L.T("LogScannerStarted"), port, baud));
             }
-            catch (Exception ex) { AddLog("掃描器連線失敗: " + ex.Message); }
+            catch (Exception ex) { AddLog(string.Format(L.T("LogScannerConnectFailed"), ex.Message)); }
         }
 
         private void HandleScannerInput(string newBarcode)
@@ -116,7 +116,7 @@ namespace CameraPhotoSystem.UI
                 txtDataMatrix.BackColor = Color.Red;
                 btnCapture.Enabled = false;
                 btnCapture.Text = (L.Current == Language.CH) ? "連續重複(鎖定)" : "Duplicate Lock";
-                AddLog("【警告】連續條碼重複，系統已鎖定。");
+                AddLog(L.T("LogDuplicateLocked"));
                 return;
             }
 
@@ -126,7 +126,7 @@ namespace CameraPhotoSystem.UI
             txtDataMatrix.Text = newBarcode;
             txtDataMatrix.BackColor = SystemColors.Window;
             
-            AddLog("掃描成功: " + newBarcode);
+            AddLog(string.Format(L.T("LogScanSuccess"), newBarcode));
             UpdateCaptureButtonUI();
             UpdatePreviewBasedOnProgress();
         }
@@ -201,7 +201,7 @@ namespace CameraPhotoSystem.UI
             btnApplyCam.Click += (s, e) => {
                 for (int i = 0; i < 3; i++) if (_mappingDropdowns[i].SelectedIndex >= 0) CameraConfigManager.Settings[i].MonikerString = _cachedDevices[_mappingDropdowns[i].SelectedIndex].MonikerString;
                 CameraConfigManager.Save(); _cameraManager.StopAllCameras(); System.Threading.Thread.Sleep(500); _cameraManager.StartAllCameras(); _cameraManager.SetPreviewIndex(0);
-                MessageBox.Show((L.Current == Language.CH) ? "相機設定已生效！" : "Camera settings applied!");
+                MessageBox.Show(L.T("MsgCamApplied"));
             };
 
             Button btnProp = new Button() {
@@ -247,7 +247,7 @@ namespace CameraPhotoSystem.UI
                 ScannerConfigManager.Setting.PortName = cmbPort.SelectedItem.ToString();
                 ScannerConfigManager.Setting.BaudRate = (int)cmbBaud.SelectedItem;
                 ScannerConfigManager.Save(); InitScanner();
-                MessageBox.Show((L.Current == Language.CH) ? "掃描器設定已儲存並重啟" : "Scanner settings saved and restarted");
+                MessageBox.Show(L.T("MsgScannerApplied"));
             };
             grpScanner.Controls.Add(lblPort); grpScanner.Controls.Add(cmbPort);
             grpScanner.Controls.Add(lblBaud); grpScanner.Controls.Add(cmbBaud);
@@ -295,7 +295,7 @@ namespace CameraPhotoSystem.UI
                     else { tabMain.SelectedTab = tpProduction; if (textBox.Text != "") MessageBox.Show(L.T("MsgWrongPwd")); }
                 }
             }
-            else { AddLog("正在從工程模式恢復生產連線..."); _cameraManager.StartAllCameras(); UpdatePreviewBasedOnProgress(); }
+            else { AddLog(L.T("LogRestoringProduction")); _cameraManager.StartAllCameras(); UpdatePreviewBasedOnProgress(); }
         }
 
         private void cmbEngCameraSelect_SelectedIndexChanged(object sender, EventArgs e) { }
@@ -383,7 +383,7 @@ namespace CameraPhotoSystem.UI
                     {
                         string uploadDir = Path.Combine(AppConfig.UploadPath, DateTime.Now.ToString("yyyyMMdd"));
                         string alertMsg = string.Format(L.T("MsgCsvUploadFailed"), dm, uploadDir, csvResult.LocalFilePath);
-                        AddLog("【錯誤】" + alertMsg.Replace("\r\n", " ").Replace("\n", " "));
+                        AddLog(L.T("LogErrorPrefix") + " " + alertMsg.Replace("\r\n", " ").Replace("\n", " "));
                         MessageBox.Show(this, alertMsg, "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
 
@@ -416,7 +416,7 @@ namespace CameraPhotoSystem.UI
             {
                 if (settingForm.ShowDialog(this) == DialogResult.OK)
                 {
-                    AddLog((L.Current == Language.CH) ? "系統設定已更新並套用。" : "Systemeinstellungen aktualisiert.");
+                    AddLog(L.T("LogSettingsUpdated"));
                 }
             }
         }

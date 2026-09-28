@@ -52,7 +52,16 @@ namespace CameraPhotoSystem.Config
             { "MsgCsvUploadFailed", new Dictionary<Language, string> { { Language.CH, "【警告】條碼 {0} 的 CSV 上傳至 [{1}] 失敗 (已重試 3 次)！\n請檢查網路連線或上傳路徑。\n\n本地 CSV 已安全保存在:\n{2}" }, { Language.DE, "【Warnung】CSV-Upload für Code {0} fehlgeschlagen (3 Versuche)!\nBitte Netzwerk oder Pfad prüfen.\n\nLokale Datei gespeichert unter:\n{2}" } } },
             { "BtnTest", new Dictionary<Language, string> { { Language.CH, "測試" }, { Language.DE, "Test" } } },
             { "MsgTestUploadSuccess", new Dictionary<Language, string> { { Language.CH, "測試 CSV 產生與上傳成功！\n\n已成功上傳至：\n{0}" }, { Language.DE, "Test-CSV erfolgreich erstellt und hochgeladen!\n\nErfolgreich hochgeladen nach:\n{0}" } } },
-            { "MsgTestUploadFailed", new Dictionary<Language, string> { { Language.CH, "測試 CSV 上傳失敗！\n\n錯誤原因：\n{0}" }, { Language.DE, "Test-CSV Upload fehlgeschlagen!\n\nFehlerursache:\n{0}" } } }
+            { "MsgTestUploadFailed", new Dictionary<Language, string> { { Language.CH, "測試 CSV 上傳失敗！\n\n錯誤原因：\n{0}" }, { Language.DE, "Test-CSV Upload fehlgeschlagen!\n\nFehlerursache:\n{0}" } } },
+            { "LogScannerStarted", new Dictionary<Language, string> { { Language.CH, "掃描器已啟動於 {0} (鮑率: {1})" }, { Language.DE, "Scanner gestartet an {0} (Baudrate: {1})" } } },
+            { "LogScannerConnectFailed", new Dictionary<Language, string> { { Language.CH, "掃描器連線失敗: {0}" }, { Language.DE, "Scanner-Verbindung fehlgeschlagen: {0}" } } },
+            { "LogDuplicateLocked", new Dictionary<Language, string> { { Language.CH, "【警告】連續條碼重複，系統已鎖定。" }, { Language.DE, "【Warnung】Fortlaufend doppelter Code, System gesperrt." } } },
+            { "LogScanSuccess", new Dictionary<Language, string> { { Language.CH, "掃描成功: {0}" }, { Language.DE, "Scan erfolgreich: {0}" } } },
+            { "LogRestoringProduction", new Dictionary<Language, string> { { Language.CH, "正在從工程模式恢復生產連線..." }, { Language.DE, "Wiederherstellung der Produktionsverbindung..." } } },
+            { "LogSettingsUpdated", new Dictionary<Language, string> { { Language.CH, "系統設定已更新並套用。" }, { Language.DE, "Systemeinstellungen aktualisiert und übernommen." } } },
+            { "MsgCamApplied", new Dictionary<Language, string> { { Language.CH, "相機設定已生效！" }, { Language.DE, "Kamera-Einstellungen übernommen!" } } },
+            { "MsgScannerApplied", new Dictionary<Language, string> { { Language.CH, "掃描器設定已儲存並重啟" }, { Language.DE, "Scanner-Einstellungen gespeichert und neu gestartet." } } },
+            { "LogErrorPrefix", new Dictionary<Language, string> { { Language.CH, "【錯誤】" }, { Language.DE, "【Fehler】" } } }
         };
 
         public static string T(string key)
