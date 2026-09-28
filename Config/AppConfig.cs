@@ -9,10 +9,10 @@ namespace CameraPhotoSystem.Config
     public class SystemSetting
     {
         public string LineName { get; set; } = "FQC_1";
-        public string PhotoRootPath { get; set; } = @"D:\Photo";
+        public string PhotoRootPath { get; set; } = @"C:\Photo";
         public int MaxPhotoCount { get; set; } = 5;
         public int DesiredWidth { get; set; } = 3840;
-        public string UploadPath { get; set; } = @"D:\Upload";
+        public string UploadPath { get; set; } = @"C:\Upload";
     }
 
     public static class AppConfig
@@ -35,7 +35,8 @@ namespace CameraPhotoSystem.Config
                     var setting = new JavaScriptSerializer().Deserialize<SystemSetting>(json);
                     if (setting != null)
                     {
-                        if (string.IsNullOrEmpty(setting.UploadPath)) setting.UploadPath = @"D:\Upload";
+                        if (string.IsNullOrEmpty(setting.PhotoRootPath)) setting.PhotoRootPath = @"C:\Photo";
+                        if (string.IsNullOrEmpty(setting.UploadPath)) setting.UploadPath = @"C:\Upload";
                         Setting = setting;
                         return;
                     }
@@ -46,14 +47,15 @@ namespace CameraPhotoSystem.Config
                 Logger.Error("載入 app_settings.json 失敗，使用預設值", ex);
             }
 
-            // 若尚未存在 app_settings.json，自 App.config 讀取初始值並建立檔案
+            // 若尚未存在 app_settings.json，以預設值建立並儲存檔案
+            Logger.Info("未找到或無法載入 app_settings.json，正在以預設值自動建立...");
             Setting = new SystemSetting
             {
                 LineName = ConfigurationManager.AppSettings["LineName"] ?? "FQC_1",
-                PhotoRootPath = ConfigurationManager.AppSettings["PhotoRootPath"] ?? @"D:\Photo",
+                PhotoRootPath = ConfigurationManager.AppSettings["PhotoRootPath"] ?? @"C:\Photo",
                 MaxPhotoCount = int.TryParse(ConfigurationManager.AppSettings["MaxPhotoCount"], out int max) ? max : 5,
                 DesiredWidth = int.TryParse(ConfigurationManager.AppSettings["DesiredWidth"], out int width) ? width : 3840,
-                UploadPath = ConfigurationManager.AppSettings["UploadPath"] ?? @"D:\Upload"
+                UploadPath = ConfigurationManager.AppSettings["UploadPath"] ?? @"C:\Upload"
             };
 
             Save();
@@ -83,10 +85,10 @@ namespace CameraPhotoSystem.Config
         }
 
         public static string LineName => Setting?.LineName ?? "FQC_1";
-        public static string PhotoRootPath => Setting?.PhotoRootPath ?? @"D:\Photo";
+        public static string PhotoRootPath => Setting?.PhotoRootPath ?? @"C:\Photo";
         public static int MaxPhotoCount => Setting?.MaxPhotoCount ?? 5;
         public static int DesiredWidth => Setting?.DesiredWidth ?? 3840;
-        public static string UploadPath => Setting?.UploadPath ?? @"D:\Upload";
+        public static string UploadPath => Setting?.UploadPath ?? @"C:\Upload";
 
         public static int CameraIndex => int.TryParse(ConfigurationManager.AppSettings["CameraIndex"], out int idx) ? idx : 0;
         public static string ScannerComPort => ConfigurationManager.AppSettings["ScannerComPort"] ?? "COM5";
